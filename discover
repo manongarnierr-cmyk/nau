@@ -1,1 +1,17 @@
 index.html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mon projet</title>
+</head>
+
+<body>
+
+  <h1>🚀 Mon projet</h1>
+
+  <h2>Versions</h2>
+  <a href="version1/">Version 1</a>
+
+</body>
+</html>
