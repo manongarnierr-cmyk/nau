@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nau — A boat is better shared.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ocean: #07202f;
+    --deep: #040f18;
+    --teal: #1a9c87;
+    --teal-light: #21c9ae;
+    --white: #ffffff;
+    --muted: rgba(255,255,255,0.42);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--ocean); color: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 52px;
+    background: linear-gradient(to bottom, rgba(4,15,24,0.9) 0%, transparent 100%);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; color: var(--white); text-decoration: none; }
+  .nav-logo em { color: var(--teal-light); font-style: normal; }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-link { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-link:hover { color: var(--white); }
+  .nav-cta {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 24px; border-radius: 100px;
+    font-family: var(--sans); font-size: 14px;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+  }
+  .nav-cta:hover { border-color: var(--teal-light); color: var(--teal-light); }
+  @media(max-width:680px) { .nav-links { display: none; } nav { padding: 20px 24px; } }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 0 24px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 75% 50% at 50% 100%, rgba(26,156,135,0.2) 0%, transparent 65%),
+      linear-gradient(180deg, #040f18 0%, #07202f 55%, #092840 100%);
+  }
+  .waves { position: absolute; bottom: 0; left: 0; right: 0; height: 130px; overflow: hidden; }
+  .wave { position: absolute; bottom: 0; left: -100%; width: 300%; border-radius: 50%; animation: wv linear infinite; }
+  .wave-1 { background: rgba(26,156,135,0.07); height: 60px; animation-duration: 10s; }
+  .wave-2 { background: rgba(26,156,135,0.04); height: 80px; bottom: 8px; animation-duration: 14s; animation-delay: -5s; }
+  @keyframes wv { 0%{transform:translateX(0)} 100%{transform:translateX(33%)} }
+
+  /* WHY — the belief */
+  .hero-why {
+    font-family: var(--serif);
+    font-size: clamp(46px, 8vw, 100px);
+    font-weight: 700; line-height: 0.97; letter-spacing: -3px;
+    margin-bottom: 36px; position: relative;
+    opacity: 0; animation: up 0.9s ease forwards 0.2s;
+  }
+  .hero-why em { font-style: italic; color: var(--teal-light); }
+
+  /* TWO TARGET LINES — who it's for, crystal clear */
+  .hero-targets {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 52px; position: relative;
+    opacity: 0; animation: up 0.9s ease forwards 0.5s;
+    max-width: 560px;
+  }
+  .target-line {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 20px; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .target-line:hover { border-color: var(--teal); background: rgba(26,156,135,0.07); }
+  .target-icon { font-size: 16px; flex-shrink: 0; }
+  .target-text { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.78); line-height: 1.3; }
+  .target-text strong { font-weight: 500; color: var(--white); }
+
+  /* CTAs */
+  .hero-actions {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    position: relative;
+    opacity: 0; animation: up 0.9s ease forwards 0.8s;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--white);
+    border: none; padding: 16px 40px; border-radius: 100px;
+    font-family: var(--sans); font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: rgba(255,255,255,0.5);
+    border: none; padding: 16px 28px; border-radius: 100px;
+    font-family: var(--sans); font-size: 15px; font-weight: 300;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+  }
+  .btn-ghost:hover { color: var(--white); }
+
+  @keyframes up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ── BELIEVE — WHY / HOW / WHAT ── */
+  .believe-wrap {
+    padding: 140px 24px 120px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .believe-inner { max-width: 900px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--teal-light); margin-bottom: 28px;
+  }
+  .believe-headline {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 700; line-height: 1.05; letter-spacing: -1.5px;
+    margin-bottom: 64px;
+  }
+  .believe-headline em { font-style: italic; color: var(--teal-light); }
+
+  .believe-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media(max-width:680px) { .believe-grid { grid-template-columns: 1fr; } }
+
+  .believe-item {
+    padding: 36px 30px; border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; background: rgba(255,255,255,0.02);
+  }
+  .believe-item.why-item {
+    border-color: rgba(26,156,135,0.35);
+    background: rgba(26,156,135,0.07);
+  }
+  .bc-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .bc-label::before { content:''; width:5px; height:5px; border-radius:50%; background: var(--teal-light); flex-shrink:0; }
+  .why-item .bc-label { color: var(--teal-light); }
+  .bc-label { color: rgba(255,255,255,0.4); }
+  .bc-text {
+    font-family: var(--serif); font-size: 17px;
+    font-weight: 400; line-height: 1.55;
+  }
+  .why-item .bc-text { color: var(--white); font-size: 19px; }
+  .bc-text { color: rgba(255,255,255,0.7); }
+
+  /* ── PILLARS ── */
+  .pillars-wrap { padding: 120px 24px; }
+  .pillars-inner { max-width: 1000px; margin: 0 auto; }
+  .pillars-head { margin-bottom: 60px; }
+  .pillars-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 700; line-height: 1.05; letter-spacing: -1.5px;
+  }
+  .pillars-title em { font-style: italic; color: var(--teal-light); }
+
+  .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width:680px) { .pillars { grid-template-columns: 1fr; } }
+
+  .pillar {
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+    padding: 48px 40px; background: rgba(255,255,255,0.02);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .pillar:hover { border-color: var(--teal); background: rgba(26,156,135,0.05); }
+  .pillar-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 12px; }
+  .pillar-name { font-family: var(--serif); font-size: 38px; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
+  .pillar-line { font-size: 16px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.52); margin-bottom: 36px; }
+  .pillar-items { list-style: none; }
+  .pillar-items li {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pillar-items li:last-child { border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--teal-light); flex-shrink: 0; }
+
+  /* ── PRICING ── */
+  .pricing-wrap {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.12); padding: 120px 24px;
+  }
+  .pricing-inner { max-width: 1000px; margin: 0 auto; }
+  .pricing-head { text-align: center; margin-bottom: 72px; }
+  .pricing-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 700; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 12px;
+  }
+  .pricing-title em { font-style: italic; color: var(--teal-light); }
+  .pricing-sub { font-size: 16px; color: var(--muted); font-weight: 300; }
+
+  .plans { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  @media(max-width:680px) { .plans { grid-template-columns: 1fr; } }
+
+  .plan {
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+    padding: 40px 28px; background: rgba(255,255,255,0.02);
+    transition: transform 0.25s; position: relative;
+  }
+  .plan:hover { transform: translateY(-5px); }
+  .plan.featured { border-color: var(--teal); background: rgba(26,156,135,0.07); }
+  .plan-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--teal); color: white; white-space: nowrap;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 16px; border-radius: 100px;
+  }
+  .plan-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 6px; }
+  .plan-name { font-family: var(--serif); font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+  .plan-price { font-family: var(--serif); font-size: 54px; font-weight: 700; line-height: 1; }
+  .plan-price sup { font-size: 22px; vertical-align: super; }
+  .plan-period { font-size: 13px; color: var(--muted); margin: 6px 0 32px; }
+  .plan-list { list-style: none; margin-bottom: 36px; }
+  .plan-list li {
+    font-size: 13px; color: rgba(255,255,255,0.62);
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; gap: 9px;
+  }
+  .plan-list li:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+  .chk { color: var(--teal-light); flex-shrink: 0; }
+  .dim { color: rgba(255,255,255,0.18); flex-shrink: 0; }
+  .plan-btn {
+    width: 100%; padding: 14px; border-radius: 100px;
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    cursor: pointer; border: none; transition: all 0.2s;
+  }
+  .btn-out { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: white; }
+  .btn-out:hover { border-color: var(--teal-light); color: var(--teal-light); }
+  .btn-fill { background: var(--teal); color: white; }
+  .btn-fill:hover { background: var(--teal-light); }
+
+  /* ── JOIN ── */
+  .join-wrap { padding: 160px 24px; text-align: center; }
+  .join-title {
+    font-family: var(--serif);
+    font-size: clamp(44px, 7vw, 88px);
+    font-weight: 700; line-height: 0.95; letter-spacing: -2.5px; margin-bottom: 20px;
+  }
+  .join-title em { font-style: italic; color: var(--teal-light); }
+  .join-sub { font-size: 17px; color: var(--muted); font-weight: 300; margin-bottom: 52px; }
+  .join-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; max-width: 400px; margin: 0 auto 16px; }
+  .join-input {
+    flex: 1; min-width: 200px; padding: 16px 24px;
+    border-radius: 100px; border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06); color: white;
+    font-family: var(--sans); font-size: 15px; outline: none; transition: border-color 0.2s;
+  }
+  .join-input::placeholder { color: rgba(255,255,255,0.28); }
+  .join-input:focus { border-color: var(--teal-light); }
+  .join-confirm { color: var(--teal-light); font-size: 15px; display: none; margin-top: 16px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 36px 52px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-logo { font-family: var(--serif); font-size: 18px; color: rgba(255,255,255,0.25); }
+  .footer-tagline { font-family: var(--serif); font-size: 13px; font-style: italic; color: rgba(255,255,255,0.18); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.on { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">n<em>au</em></a>
+  <div class="nav-links">
+    <a href="#believe" class="nav-link">Why Nau</a>
+    <a href="#pillars" class="nav-link">Swap & Crew</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+  </div>
+  <a href="#join" class="nav-cta">Join the beta</a>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="waves">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+  </div>
+
+  <!-- WHY — belief, no explanation -->
+  <h1 class="hero-why">A boat is<br><em>better shared.</em></h1>
+
+  <!-- WHO — two targets, instantly clear -->
+  <div class="hero-targets">
+    <div class="target-line">
+      <span class="target-icon">⚓</span>
+      <span class="target-text"><strong>Own a boat?</strong> Swap it with another owner — sail somewhere new this summer.</span>
+    </div>
+    <div class="target-line">
+      <span class="target-icon">⛵</span>
+      <span class="target-text"><strong>No boat?</strong> Join a crew, share the costs — no experience needed.</span>
+    </div>
+  </div>
+
+  <!-- CTA — discover first, join second -->
+  <div class="hero-actions">
+    <a href="#believe" class="btn-primary">Discover Nau ↓</a>
+    <a href="#join" class="btn-ghost">Join the beta</a>
+  </div>
+</div>
+
+<!-- ── WHAT WE BELIEVE ── -->
+<div class="believe-wrap" id="believe">
+  <div class="believe-inner">
+    <p class="section-eyebrow reveal">Why Nau exists</p>
+    <h2 class="believe-headline reveal">We believe boats<br>were made to <em>move.</em></h2>
+    <div class="believe-grid">
+      <div class="believe-item why-item reveal">
+        <div class="bc-label">WHY</div>
+        <p class="bc-text">"A boat sitting in port is a life not lived. Every boat deserves to move — and every sailor deserves to go further."</p>
+      </div>
+      <div class="believe-item reveal">
+        <div class="bc-label">HOW</div>
+        <p class="bc-text">A verified community of owners and crew who trust each other. Insurance included. No friction. Just sailing.</p>
+      </div>
+      <div class="believe-item reveal">
+        <div class="bc-label">WHAT</div>
+        <p class="bc-text">Swap your boat with another owner. Open your deck to crew. Sail further than you ever did alone.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PILLARS ── -->
+<div class="pillars-wrap" id="pillars">
+  <div class="pillars-inner">
+    <div class="pillars-head reveal">
+      <p class="section-eyebrow">Two ways to be part of Nau</p>
+      <h2 class="pillars-title">Your boat.<br><em>Your crew.</em></h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <p class="pillar-tag">For boat owners</p>
+        <h3 class="pillar-name">Nau Swap</h3>
+        <p class="pillar-line">Your boat in Barcelona. Mine in Menorca. We trade for the summer — no money, just trust between sailors.</p>
+        <ul class="pillar-items">
+          <li><span class="dot"></span>Unlimited exchanges</li>
+          <li><span class="dot"></span>Points system — no need to swap at the same time</li>
+          <li><span class="dot"></span>Temporary insurance included</li>
+          <li><span class="dot"></span>Verified skippers only</li>
+          <li><span class="dot"></span>Flash rental when no match available</li>
+        </ul>
+      </div>
+      <div class="pillar reveal">
+        <p class="pillar-tag">For crew & adventurers</p>
+        <h3 class="pillar-name">Nau Crew</h3>
+        <p class="pillar-line">A boat owner is heading to Formentera and has one spot open. You join, share the fuel — and you're sailing.</p>
+        <ul class="pillar-items">
+          <li><span class="dot"></span>Board any boat, anywhere</li>
+          <li><span class="dot"></span>Share real costs only — not a rental</li>
+          <li><span class="dot"></span>Day trips to 2-week crossings</li>
+          <li><span class="dot"></span>Verified community members</li>
+          <li><span class="dot"></span>No experience needed to start</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRICING ── -->
+<div class="pricing-wrap" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-head reveal">
+      <p class="section-eyebrow">Simple pricing</p>
+      <h2 class="pricing-title">One community.<br><em>Three ways in.</em></h2>
+      <p class="pricing-sub">No hidden fees. No commission on direct swaps.</p>
+    </div>
+    <div class="plans">
+      <div class="plan reveal">
+        <p class="plan-tag">Crew & adventurers</p>
+        <p class="plan-name">Nau Crew</p>
+        <p class="plan-price"><sup>€</sup>9</p>
+        <p class="plan-period">per month · or €79/year</p>
+        <ul class="plan-list">
+          <li><span class="chk">✓</span>All crew postings</li>
+          <li><span class="chk">✓</span>Verified sailor profile</li>
+          <li><span class="chk">✓</span>Direct messaging</li>
+          <li><span class="chk">✓</span>Share real costs only</li>
+          <li><span class="dim">—</span><span style="color:rgba(255,255,255,0.22)">No boat listing</span></li>
+        </ul>
+        <button class="plan-btn btn-out" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Join as crew</button>
+      </div>
+      <div class="plan featured reveal">
+        <div class="plan-badge">Most popular</div>
+        <p class="plan-tag">Boat owners</p>
+        <p class="plan-name">Nau Swap</p>
+        <p class="plan-price"><sup>€</sup>15</p>
+        <p class="plan-period">per month · or €149/year</p>
+        <ul class="plan-list">
+          <li><span class="chk">✓</span>Unlimited exchanges</li>
+          <li><span class="chk">✓</span>Points system</li>
+          <li><span class="chk">✓</span>Insurance included</li>
+          <li><span class="chk">✓</span>Flash rental</li>
+          <li><span class="dim">—</span><span style="color:rgba(255,255,255,0.22)">No crew posting</span></li>
+        </ul>
+        <button class="plan-btn btn-fill" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">List my boat</button>
+      </div>
+      <div class="plan reveal">
+        <p class="plan-tag">Everything</p>
+        <p class="plan-name">Nau All Seas</p>
+        <p class="plan-price"><sup>€</sup>19</p>
+        <p class="plan-period">per month · or €179/year</p>
+        <ul class="plan-list">
+          <li><span class="chk">✓</span>Everything in Swap</li>
+          <li><span class="chk">✓</span>Open your boat to crew</li>
+          <li><span class="chk">✓</span>Priority visibility</li>
+          <li><span class="chk">✓</span>Priority insurance access</li>
+          <li><span class="chk">✓</span>Early features access</li>
+        </ul>
+        <button class="plan-btn btn-out" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Go all in</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── JOIN ── -->
+<div class="join-wrap" id="join">
+  <h2 class="join-title reveal">Join the<br><em>community.</em></h2>
+  <p class="join-sub reveal">First 50 members — founding price. Forever.</p>
+  <div class="join-form reveal">
+    <input type="email" class="join-input" placeholder="your@email.com" id="em">
+    <button class="btn-primary" onclick="join()">Join Nau</button>
+  </div>
+  <p class="join-confirm" id="conf">⛵ You're in. We'll be in touch soon.</p>
+</div>
+
+<footer>
+  <div class="footer-logo">nau</div>
+  <div class="footer-tagline">"A boat is better shared."</div>
+  <div class="footer-copy">© 2025 Nau · Barcelona · joinnau.com</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(el => {
+    new IntersectionObserver(([e]) => { if(e.isIntersecting) el.classList.add('on'); }, {threshold:0.08}).observe(el);
+  });
+  function join() {
+    const v = document.getElementById('em').value;
+    if(v && v.includes('@')) {
+      document.getElementById('conf').style.display = 'block';
+      document.getElementById('em').value = '';
+    } else {
+      document.getElementById('em').style.borderColor = '#e24b4a';
+      setTimeout(() => document.getElementById('em').style.borderColor = '', 1500);
+    }
+  }
+</script>
+</body>
+</html>

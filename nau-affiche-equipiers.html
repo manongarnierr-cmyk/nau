@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nau — Crew Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #e0dbd2;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px 16px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .poster {
+    width: 480px;
+    background: #f5f0e8;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: #07202f;
+    padding: 10px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .top-bar-logo { font-family: 'Playfair Display', serif; font-size: 16px; color: white; letter-spacing: -0.3px; }
+  .top-bar-logo em { color: #21c9ae; font-style: normal; }
+  .top-bar-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  /* HERO */
+  .hero-area {
+    background: #07202f;
+    padding: 44px 40px 40px;
+    position: relative; overflow: hidden;
+  }
+  .hero-area::before {
+    content: '';
+    position: absolute; bottom: -30px; left: -10%; width: 120%;
+    height: 80px; border-radius: 50%;
+    background: #f5f0e8;
+    z-index: 1;
+  }
+  /* Wave deco */
+  .deco-wave {
+    position: absolute; right: 24px; top: 28px;
+    font-size: 90px; opacity: 0.06; line-height: 1;
+  }
+
+  .hero-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #21c9ae;
+    margin-bottom: 16px; position: relative; z-index: 2;
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px; font-weight: 700; line-height: 1.0;
+    letter-spacing: -1.5px; color: white;
+    position: relative; z-index: 2;
+  }
+  .hero-headline em { font-style: italic; color: #21c9ae; }
+
+  /* BODY — light background */
+  .body { padding: 44px 40px 32px; background: #f5f0e8; }
+
+  .why-line {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: #3d5a66;
+    margin-bottom: 32px;
+    border-left: 2px solid #1a9c87;
+    padding-left: 16px;
+  }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 2px; margin-bottom: 32px; }
+  .step {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 16px; border-radius: 10px;
+    background: rgba(7,32,47,0.04);
+    border: 1px solid rgba(7,32,47,0.07);
+  }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #07202f; color: #21c9ae;
+    font-size: 12px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-body {}
+  .step-title { font-size: 14px; font-weight: 500; color: #07202f; margin-bottom: 2px; }
+  .step-desc { font-size: 12px; color: #6b8a96; line-height: 1.4; }
+
+  /* PRICE PILL */
+  .price-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #07202f; border-radius: 12px;
+    padding: 18px 22px; margin-bottom: 20px; gap: 12px;
+  }
+  .price-left {}
+  .price-main { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: white; }
+  .price-main sup { font-size: 16px; vertical-align: super; }
+  .price-period { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+  .price-right { text-align: right; }
+  .price-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .price-free { font-size: 13px; font-weight: 500; color: #21c9ae; }
+
+  /* CTA */
+  .cta-btn {
+    width: 100%; padding: 16px;
+    background: #1a9c87; color: white; border: none;
+    border-radius: 100px; font-family: 'DM Sans', sans-serif;
+    font-size: 16px; font-weight: 500; cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+
+  /* BOTTOM */
+  .bottom {
+    padding: 16px 40px;
+    border-top: 1px solid rgba(7,32,47,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    background: #f5f0e8;
+  }
+  .bottom-url { font-size: 12px; color: #1a9c87; font-weight: 500; letter-spacing: 0.04em; }
+  .bottom-tagline { font-family: 'Playfair Display', serif; font-size: 11px; font-style: italic; color: rgba(7,32,47,0.3); }
+
+  /* Destinations pills */
+  .destinations { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
+  .dest {
+    font-size: 11px; font-weight: 500; padding: 4px 12px;
+    border-radius: 100px; background: rgba(7,32,47,0.07);
+    color: #3d5a66; letter-spacing: 0.03em;
+  }
+
+  .print-hint { text-align: center; margin-top: 20px; font-size: 12px; color: rgba(0,0,0,0.3); }
+  @media print {
+    body { background: white; padding: 0; }
+    .print-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="poster">
+
+    <div class="top-bar">
+      <div class="top-bar-logo">n<em>au</em></div>
+      <div class="top-bar-tag">For crew & adventurers</div>
+    </div>
+
+    <div class="hero-area">
+      <span class="deco-wave">⛵</span>
+      <p class="hero-tag">No boat? No problem.</p>
+      <h1 class="hero-headline">Sail the Med<br>for the price<br>of <em>a pizza.</em></h1>
+    </div>
+
+    <div class="body">
+
+      <p class="why-line">
+        Boat owners in Barcelona are looking for crew right now. You share the fuel. They share the helm.
+      </p>
+
+      <div class="destinations">
+        <span class="dest">Costa Brava</span>
+        <span class="dest">Balearics</span>
+        <span class="dest">Formentera</span>
+        <span class="dest">Delta de l'Ebre</span>
+        <span class="dest">Côte d'Azur</span>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Create your profile</div>
+            <div class="step-desc">2 minutes. No experience needed. Just your love for the sea.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Browse departures</div>
+            <div class="step-desc">Day trips, weekends, or 2-week crossings. You choose.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Share the costs — sail</div>
+            <div class="step-desc">Fuel, port fees, food. Split fairly. That's all you pay.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-bar">
+        <div class="price-left">
+          <div class="price-main"><sup>€</sup>9</div>
+          <div class="price-period">per month</div>
+        </div>
+        <div class="price-right">
+          <div class="price-free">Free during beta</div>
+          <div class="price-desc">First 50 members.<br>Join now.</div>
+        </div>
+      </div>
+
+      <button class="cta-btn">joinnau.com — join free</button>
+
+    </div>
+
+    <div class="bottom">
+      <div class="bottom-url">joinnau.com</div>
+      <div class="bottom-tagline">"The sea connects us."</div>
+    </div>
+
+  </div>
+  <p class="print-hint">A4 · Print or share as image</p>
+</div>
+
+</body>
+</html>

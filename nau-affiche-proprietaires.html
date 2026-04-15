@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nau — Owners Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #e8e4dc;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px 16px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .poster {
+    width: 480px;
+    background: #07202f;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: #1a9c87;
+    padding: 10px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .top-bar-logo { font-family: 'Playfair Display', serif; font-size: 16px; color: white; letter-spacing: -0.3px; }
+  .top-bar-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+
+  /* HERO IMAGE AREA */
+  .hero-area {
+    height: 220px;
+    background:
+      linear-gradient(to bottom, rgba(7,32,47,0) 0%, rgba(7,32,47,0.7) 100%),
+      radial-gradient(ellipse 120% 100% at 50% 100%, rgba(26,156,135,0.25) 0%, transparent 60%),
+      linear-gradient(135deg, #0a2535 0%, #0d3a50 50%, #0a2535 100%);
+    display: flex; align-items: flex-end; padding: 28px 40px;
+    position: relative; overflow: hidden;
+  }
+  /* Wave decoration */
+  .hero-area::before {
+    content: '';
+    position: absolute; bottom: -20px; left: -10%; width: 120%;
+    height: 80px; border-radius: 50%;
+    background: rgba(26,156,135,0.08);
+  }
+  .hero-area::after {
+    content: '';
+    position: absolute; bottom: -30px; left: -20%; width: 140%;
+    height: 70px; border-radius: 50%;
+    background: rgba(26,156,135,0.05);
+  }
+  /* Anchor decoration */
+  .anchor-deco {
+    position: absolute; right: 32px; top: 24px;
+    font-size: 80px; opacity: 0.07;
+    line-height: 1;
+  }
+  .hero-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #21c9ae;
+    margin-bottom: 8px;
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 700; line-height: 1.0;
+    letter-spacing: -1.5px; color: white;
+  }
+  .hero-headline em { font-style: italic; color: #21c9ae; }
+
+  /* BODY */
+  .body { padding: 36px 40px 32px; }
+
+  /* WHY — one sentence */
+  .why-line {
+    font-size: 15px; font-weight: 300; line-height: 1.65;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 32px;
+    border-left: 2px solid #1a9c87;
+    padding-left: 16px;
+  }
+
+  /* 3 OFFERS */
+  .offers { display: flex; flex-direction: column; gap: 2px; margin-bottom: 32px; }
+  .offer {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: background 0.2s;
+  }
+  .offer-icon { font-size: 20px; flex-shrink: 0; }
+  .offer-body {}
+  .offer-title { font-size: 14px; font-weight: 500; color: white; margin-bottom: 2px; }
+  .offer-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+
+  /* CTA */
+  .cta-area {
+    background: rgba(26,156,135,0.12);
+    border: 1px solid rgba(26,156,135,0.25);
+    border-radius: 12px; padding: 20px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px;
+  }
+  .cta-left {}
+  .cta-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: white; margin-bottom: 2px; }
+  .cta-sub { font-size: 12px; color: rgba(255,255,255,0.45); }
+  .cta-btn {
+    background: #1a9c87; color: white;
+    border: none; padding: 11px 22px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    white-space: nowrap; flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  /* BOTTOM */
+  .bottom {
+    padding: 16px 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .bottom-url { font-size: 12px; color: #21c9ae; letter-spacing: 0.05em; }
+  .bottom-tagline { font-family: 'Playfair Display', serif; font-size: 11px; font-style: italic; color: rgba(255,255,255,0.25); }
+
+  /* Print hint */
+  .print-hint { text-align: center; margin-top: 20px; font-size: 12px; color: rgba(0,0,0,0.3); }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .poster { box-shadow: none; }
+    .print-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="poster">
+
+    <div class="top-bar">
+      <div class="top-bar-logo">nau</div>
+      <div class="top-bar-tag">For boat owners</div>
+    </div>
+
+    <div class="hero-area">
+      <div class="anchor-deco">⚓</div>
+      <div>
+        <p class="hero-tag">Your boat. More sea.</p>
+        <h1 class="hero-headline">Stop paying<br>for a boat<br>that <em>sleeps.</em></h1>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <p class="why-line">
+        Your boat sits in port 300 days a year. This summer, make it work for you — and sail further than ever.
+      </p>
+
+      <div class="offers">
+        <div class="offer">
+          <span class="offer-icon">⇄</span>
+          <div class="offer-body">
+            <div class="offer-title">Swap your boat</div>
+            <div class="offer-desc">Exchange with another owner in the Med. Your boat in Barcelona → their boat in Dubrovnik.</div>
+          </div>
+        </div>
+        <div class="offer">
+          <span class="offer-icon">👥</span>
+          <div class="offer-body">
+            <div class="offer-title">Recruit your crew</div>
+            <div class="offer-desc">Find motivated crew who share the real costs. You navigate. They pay fuel and port.</div>
+          </div>
+        </div>
+        <div class="offer">
+          <span class="offer-icon">€</span>
+          <div class="offer-body">
+            <div class="offer-title">Flash rental</div>
+            <div class="offer-desc">No match? List your boat for a quick rental. 12% commission. You keep the rest.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-area">
+        <div class="cta-left">
+          <div class="cta-title">Join free — 6 months</div>
+          <div class="cta-sub">Beta founders · Barcelona · Summer 2025</div>
+        </div>
+        <div class="cta-btn">joinnau.com</div>
+      </div>
+
+    </div>
+
+    <div class="bottom">
+      <div class="bottom-url">joinnau.com</div>
+      <div class="bottom-tagline">"The sea connects us."</div>
+    </div>
+
+  </div>
+  <p class="print-hint">A4 · Print or share as image</p>
+</div>
+
+</body>
+</html>
