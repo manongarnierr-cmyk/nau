@@ -9,11 +9,13 @@
   p { color: #888; font-size: 14px; margin-bottom: 40px; }
   h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; margin: 28px 0 10px; border-top: 1px solid #eee; padding-top: 16px; }
   ul { list-style: none; padding: 0; }
-  li { margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+  li { margin-bottom: 16px; }
+  .li-row { display: flex; align-items: center; gap: 12px; }
   a.main { font-size: 15px; color: #1a9c87; text-decoration: none; cursor: pointer; }
   a.main:hover { text-decoration: underline; }
   a.full { font-size: 12px; color: #aaa; text-decoration: none; border: 1px solid #ddd; padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
   a.full:hover { color: #07202f; border-color: #aaa; }
+  .comment { font-size: 12px; color: #bbb; font-style: italic; margin-top: 4px; }
   #preview { margin-top: 32px; display: none; }
   .preview-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   #preview-title { font-size: 13px; color: #888; }
@@ -28,48 +30,101 @@
 
 <h2>Site</h2>
 <ul>
+
   <li>
-    <a class="main" onclick="preview('nau-landing-v4.html', 'V4 — Golden Circle · Two targets')">V4 — Golden Circle · Two targets</a>
-      <span class="comment">tt</span>
-    <a class="full" href="nau-landing-v4.html" target="_blank">Open full ↗</a>
+    <div class="li-row">
+      <a class="main" onclick="preview('nau-landing-v4.html', 'V4')">V4 — Golden Circle · Two targets</a>
+      <a class="full" href="nau-landing-v4.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">Version à montrer à l'associé demain</div>
   </li>
+
   <li>
-    <a class="main" onclick="preview('nau-landing-v3.html', 'V3 — Golden Circle · First attempt')">V3 — Golden Circle · First attempt</a>
-      <span class="comment">tt</span>
-    <a class="full" href="nau-landing-v3.html" target="_blank">Open full ↗</a>
+    <div class="li-row">
+      <a class="main" onclick="preview('nau-landing-v3.html', 'V3')">V3 — Golden Circle · First attempt</a>
+      <a class="full" href="nau-landing-v3.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">Première version Golden Circle</div>
   </li>
+
   <li>
-    <a class="main" onclick="preview('nau-landing-v2.html', 'V2 — Sail further')">V2 — Sail further</a>
-      <span class="comment">tt</span>
-    <a class="full" href="nau-landing-v2.html" target="_blank">Open full ↗</a>
+    <div class="li-row">
+      <a class="main" onclick="preview('nau-landing-v2.html', 'V2')">V2 — Sail further</a>
+      <a class="full" href="nau-landing-v2.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">Tagline "Sail further" — remplacée</div>
   </li>
+
   <li>
-    <a class="main" onclick="preview('nau-landing.html', 'V1 — First draft')">V1 — First draft</a>
-    <a class="full" href="nau-landing.html" target="_blank">Open full ↗</a>
+    <div class="li-row">
+      <a class="main" onclick="preview('nau-landing.html', 'V1')">V1 — First draft</a>
+      <a class="full" href="nau-landing.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">Premier jet — trop de texte</div>
   </li>
-  <!-- NOUVELLE VERSION : copie un bloc <li>...</li> ici -->
+
+  <!-- NOUVELLE VERSION — copie ce bloc et modifie les 3 choses : nom fichier, titre, commentaire
+  <li>
+    <div class="li-row">
+      <a class="main" onclick="preview('NOM-FICHIER.html', 'TITRE')">TITRE</a>
+      <a class="full" href="NOM-FICHIER.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">TON COMMENTAIRE</div>
+  </li>
+  -->
+
 </ul>
 
 <h2>Affiches — Propietaris</h2>
 <ul>
+
   <li>
-    <a class="main" onclick="preview('nau-affiche-proprietaires.html', 'Affiche propietaris')">Affiche propietaris</a>
-    <a class="full" href="nau-affiche-proprietaires.html" target="_blank">Open full ↗</a>
+    <div class="li-row">
+      <a class="main" onclick="preview('nau-affiche-proprietaires.html', 'Affiche propietaris')">Affiche propietaris</a>
+      <a class="full" href="nau-affiche-proprietaires.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">En català — pour les ports</div>
   </li>
+
+  <!-- NOUVELLE AFFICHE — copie ce bloc
+  <li>
+    <div class="li-row">
+      <a class="main" onclick="preview('NOM-FICHIER.html', 'TITRE')">TITRE</a>
+      <a class="full" href="NOM-FICHIER.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">TON COMMENTAIRE</div>
+  </li>
+  -->
+
 </ul>
 
 <h2>Affiches — Equipiers</h2>
 <ul>
+
   <li>
-    <a class="main" onclick="preview('nau-affiche-equipiers.html', 'Affiche equipiers')">Affiche equipiers</a>
-    <a class="full" href="nau-affiche-equipiers.html" target="_blank">Open full ↗</a>
+    <div class="li-row">
+      <a class="main" onclick="preview('nau-affiche-equipiers.html', 'Affiche equipiers')">Affiche equipiers</a>
+      <a class="full" href="nau-affiche-equipiers.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">En català — pour les universités</div>
   </li>
+
+  <!-- NOUVELLE AFFICHE — copie ce bloc
+  <li>
+    <div class="li-row">
+      <a class="main" onclick="preview('NOM-FICHIER.html', 'TITRE')">TITRE</a>
+      <a class="full" href="NOM-FICHIER.html" target="_blank">Open full ↗</a>
+    </div>
+    <div class="comment">TON COMMENTAIRE</div>
+  </li>
+  -->
+
 </ul>
 
 <div id="preview">
   <div class="preview-bar">
     <span id="preview-title"></span>
-    <button class="close-btn" onclick="close()">✕ Close</button>
+    <button class="close-btn" onclick="document.getElementById('preview').style.display='none';document.getElementById('frame').src=''">✕ Close</button>
   </div>
   <iframe id="frame" src=""></iframe>
 </div>
@@ -80,10 +135,6 @@ function preview(src, title) {
   document.getElementById('frame').src = src;
   document.getElementById('preview').style.display = 'block';
   setTimeout(() => document.getElementById('preview').scrollIntoView({ behavior: 'smooth' }), 100);
-}
-function close() {
-  document.getElementById('preview').style.display = 'none';
-  document.getElementById('frame').src = '';
 }
 </script>
 
